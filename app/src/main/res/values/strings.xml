@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Music player</string>
+    <string name="recent">Recent</string>
+    <string name="refresh">Refresh</string>
+    <string name="fav">Fav</string>
+    <string name="playlist">Playlist</string>
+    <string name="folder">Folders</string>
+    <string name="songs">Songs</string>
+    <string name="img_play_content_desc">Image to play song</string>
+    <string name="img_song_content_desc">Song display image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="music">Music Player</string>
+</resources>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.musicplayer.presentation.utils.UtilsKt" />
+
+        <import type="com.example.musicplayer.data.dao.Song" />
+
+        <import type="com.example.musicplayer.data.dao.Converter" />
+
+        <variable
+            name="song"
+            type="com.example.musicplayer.data.dao.Song" />
+
+        <variable
+            name="vm"
+            type="com.example.musicplayer.presentation.vm.FolderListVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/player_theme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp">
+
+        <ImageView
+            android:id="@+id/img_down_arrow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icons_down_arrow_48"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txt_song_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/txt_song_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".01" />
+
+        <TextView
+            android:id="@+id/txt_song_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{song.name}"
+            android:textSize="@dimen/normal_item_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="9"
+            app:layout_constraintLeft_toRightOf="@+id/img_down_arrow"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".01" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_song"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_margin="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_song_name"
+            app:layout_constraintVertical_bias="0" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="@{vm.seekBarMAxValue}"
+            android:progress="@{vm.seekBarValue}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_song" />
+
+        <TextView
+            android:id="@+id/txt_song_play_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@{vm.durationElapsedInMMSS}"
+            app:layout_constraintStart_toStartOf="@+id/progress_bar"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+        <TextView
+            android:id="@+id/txt_song_play_total_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@{vm.totalDurationInMMSS}"
+            app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+        <!--        android:text="@{Converter.milliSecsToHHMM(song.duration)}"-->
+
+
+        <ImageButton
+            android:id="@+id/img_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@color/white"
+            android:onClick="@{(view)->vm.onPlayClick()}"
+            android:src="@{vm.playImgStatus ? @drawable/icon_play:@drawable/icon_pause}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+        <ImageButton
+            android:id="@+id/img_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@color/white"
+            android:onClick="@{(view)->vm.changeSong(true)}"
+            android:src="@mipmap/icon_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias=".6"
+            app:layout_constraintStart_toStartOf="@+id/img_play"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+        <ImageButton
+            android:id="@+id/img_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:onClick="@{(view)->vm.changeSong(false)}"
+            android:src="@mipmap/icon_prev"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/img_play"
+            app:layout_constraintHorizontal_bias=".4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

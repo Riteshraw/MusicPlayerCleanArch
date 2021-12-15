@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/folderListFragment">
+
+    <fragment
+        android:id="@+id/folderListFragment"
+        android:name="com.example.musicplayer.presentation.ui.FolderListFragment"
+        android:label="fragment_folder_list"
+        tools:layout="@layout/fragment_folder_list">
+        <action
+            android:id="@+id/action_folderListFragment_to_songListFragment"
+            app:destination="@id/songListFragment"
+            app:enterAnim="@anim/animation_enter_right_to_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/animation_leave_left_to_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/songListFragment"
+        android:name="com.example.musicplayer.presentation.ui.SongListFragment"
+        android:label="SongListFragment">
+        <action
+            android:id="@+id/action_songListFragment_to_playerFragment"
+            app:destination="@id/playerFragment"
+            app:enterAnim="@anim/animation_enter_bottom_to_top"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/animation_leave_top_to_bottom"></action>
+        <argument
+            android:name="folderName"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.musicplayer.presentation.ui.PlayerFragment"
+        android:label="PlayerFragment">
+        <argument
+            android:name="position"
+            android:defaultValue="0"
+            app:argType="integer"
+            app:nullable="false" />
+        <argument
+            android:name="song"
+            android:defaultValue="@null"
+            app:argType="com.example.musicplayer.data.dao.Song"
+            app:nullable="true" />
+        <argument
+            android:name="songList"
+            android:defaultValue="@null"
+            app:argType="com.example.musicplayer.data.dao.Song[]"
+            app:nullable="true" />
+    </fragment>
+</navigation>
